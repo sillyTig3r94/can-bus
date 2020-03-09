@@ -563,8 +563,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	printf("\n\r");
 	switch(RxHeader.StdId)
 	{
-	case 0x02:
-		TxHeader.StdId = 0x102;	//CAN Standard ID
+	case 0x05:
+		TxHeader.StdId = 0x105;	//CAN Standard ID
 		/* prepare data */
 		TxData[0] = 'H';
 		TxData[1] = 'E';
@@ -576,7 +576,8 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		TxData[7] = 0x00;
 		HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox);
 		break;
-	case 0x03:
+	case 0x06:
+		TxHeader.StdId = 0x106;	//CAN Standard ID
 		TxData[0] = 'W';
 		TxData[1] = 'O';
 		TxData[2] = 'R';
@@ -585,9 +586,19 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		TxData[5] = 0x00;
 		TxData[6] = 0x00;
 		TxData[7] = 0x00;
-		TxHeader.StdId = 0x103;	//CAN Standard ID
 		HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox);
 		break;
+	case 0x07:
+		TxHeader.StdId = 0x107;	//CAN Standard ID
+		TxData[0] = 'E';
+		TxData[1] = 'N';
+		TxData[2] = 'D';
+		TxData[3] = 'G';
+		TxData[4] = 'A';
+		TxData[5] = 'M';
+		TxData[6] = 'E';
+		TxData[7] = 0x00;
+		HAL_CAN_AddTxMessage(hcan, &TxHeader, TxData, &TxMailbox);
 	default:
 		break;
 	}
